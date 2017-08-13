@@ -1,0 +1,11 @@
+{
+  "name": "serial-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serialport": "^5.0.0"
+  }
+}
