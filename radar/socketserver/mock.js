@@ -15,8 +15,12 @@ wss.on('connection', function connection(ws) {
 
   const data = gen()
 
-  setInterval(() => {
+  const id = setInterval(() => {
     ws.send(JSON.stringify(data.next().value))
   }, 20)
+
+  ws.on('close', () => {
+    clearInterval(id)
+  })
 
 })
