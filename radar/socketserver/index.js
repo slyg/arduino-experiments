@@ -9,15 +9,15 @@ port
   .pipe(parser)
   .on('open', () => console.log('Port open'))
 
-
-// WS server
-
 const wss = new WebSocket.Server({ port: 9999 })
 
 wss.on('connection', function connection(ws) {
 
   const cb = (data) => {
-    const [ angle, distance ] = data.split(',')
+    const [ angleString, distanceString ] = data.split(',')
+    const [ angle, distance ] = [ parseInt(angle, 10), parseInt(distance, 10) ]
+
+    console.log(angle, distance)
     ws.send(JSON.stringify({ angle, distance }))
   }
 
