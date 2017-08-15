@@ -3,9 +3,7 @@
 #define PWM_ECHO 10
 #define PWM_SERVO 11
 #define DELIMITER "\n" // used to separate each message
-
-const int PI_proportion = 90;  // Number of PI divisions where the servo stops
-const int PI_delay = 10;       // Delay (ms) given to the servo to accomplish a PI/PI_proportion angle
+#define MEASURE_DELAY 2 // Delay (ms) given to the servo to accomplish a distance measure
 
 long duration;
 int distance;
@@ -27,6 +25,13 @@ int measureDistance(){
   // Read the time when the echo comes back
   duration = pulseIn(PWM_ECHO, HIGH); // in μs
   return duration*0.034/2; // in cm;
+}
+
+void getMeasure(int angle){
+  servo.write(angle);
+  delay(MEASURE_DELAY);
+  distance = measureDistance();
+  sendData(angle, distance);
 }
 
 void sendData(int a, int d){
@@ -53,19 +58,11 @@ void setup() {
 
 void loop() {
 
-  for (int piRatio = 0; piRatio <= PI_proportion; piRatio++){
-    angle = map(piRatio, 0, PI_proportion, 0, 180);
-    servo.write(angle);
-    delay(PI_delay);
-    distance = measureDistance();
-    sendData(angle, distance);
+  for (int angle = 0; angle <= 180; angle++){
+    getMeasure(angle);
   }
-  for (int piRatio = 0; piRatio <= PI_proportion; piRatio++){
-    angle = map(piRatio, 0, PI_proportion, 180, 0);
-    servo.write(angle);
-    delay(PI_delay);
-    distance = measureDistance();
-    sendData(angle, distance);
+  for (int angle = 180; angle >= 0; angle--){
+    getMeasure(angle);
   }
 
 }

@@ -12,7 +12,7 @@ type alias Distance =
 
 
 type alias CartesianCoord =
-    ( Int, Int )
+    ( Float, Float )
 
 
 type alias PolarCoordRecord =

@@ -54,13 +54,11 @@ polarToCartesianCoord ( angle, distance ) =
         x =
             distance
                 |> (*) (cos (degrees angle))
-                |> floor
                 |> zoom
 
         y =
             distance
                 |> (*) (sin (degrees (angle + 180)))
-                |> floor
                 |> zoom
     in
         ( x, y )
