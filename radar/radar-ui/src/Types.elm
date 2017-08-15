@@ -4,11 +4,19 @@ import Dict exposing (Dict)
 
 
 type alias Angle =
-    Int
+    Float
+
+
+type alias Distance =
+    Float
 
 
 type alias Point =
     ( Int, Int )
+
+
+type alias TrigoPoint =
+    { angle : Angle, distance : Float }
 
 
 type alias Model =
@@ -18,3 +26,4 @@ type alias Model =
 
 type Msg
     = Noop
+    | Frame String
