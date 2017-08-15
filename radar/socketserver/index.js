@@ -15,8 +15,7 @@ wss.on('connection', function connection(ws) {
 
   const cb = (data) => {
     const [ angleString, distanceString ] = data.split(',')
-    const [ angle, distance ] = [ parseInt(angle, 10), parseInt(distance, 10) ]
-
+    const [ angle, distance ] = [ +angleString, +distanceString ]
     console.log(angle, distance)
     ws.send(JSON.stringify({ angle, distance }))
   }
