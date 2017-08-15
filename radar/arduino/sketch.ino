@@ -4,7 +4,7 @@
 #define PWM_SERVO 11
 #define DELIMITER "\n" // used to separate each message
 
-const int PI_proportion = 45;  // Number of PI divisions where the servo stops
+const int PI_proportion = 90;  // Number of PI divisions where the servo stops
 const int PI_delay = 10;       // Delay (ms) given to the servo to accomplish a PI/PI_proportion angle
 
 long duration;
