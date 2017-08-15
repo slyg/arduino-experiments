@@ -1,6 +1,4 @@
-# Serial Node
-
-Using the `serialport` module to log serial port data from within a node process.
+# Radar
 
 ## Setup
 
