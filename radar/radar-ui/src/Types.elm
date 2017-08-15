@@ -16,7 +16,7 @@ type alias Point =
 
 
 type alias TrigoPoint =
-    { angle : Angle, distance : Float }
+    { angle : Angle, distance : Distance }
 
 
 type alias Model =
