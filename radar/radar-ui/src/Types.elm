@@ -11,20 +11,20 @@ type alias Distance =
     Float
 
 
-type alias Coord =
+type alias CartesianCoord =
     ( Int, Int )
 
 
-type alias SphericalCoordRecord =
+type alias PolarCoordRecord =
     { angle : Angle, distance : Distance }
 
 
-type alias SphericalCoord =
+type alias PolarCoord =
     ( Angle, Distance )
 
 
 type alias Model =
-    { points : Dict Angle Coord
+    { points : Dict Angle CartesianCoord
     }
 
 

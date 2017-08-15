@@ -23,30 +23,30 @@ update msg model =
 
         Frame msg ->
             let
-                sphericalCoord =
+                polarCoord =
                     msg
-                        |> decodeString sphericalCoordRecordDecoder
+                        |> decodeString polarCoordRecordDecoder
                         |> Result.withDefault { angle = 0, distance = 0 }
                         |> \{ angle, distance } -> ( angle, distance )
 
                 ( angle, _ ) =
-                    sphericalCoord
+                    polarCoord
 
                 point =
-                    sphericalToCartesianCoord sphericalCoord
+                    polarToCartesianCoord polarCoord
             in
                 { model | points = Dict.insert angle point model.points } ! []
 
 
-sphericalCoordRecordDecoder : Decoder SphericalCoordRecord
-sphericalCoordRecordDecoder =
-    Decode.map2 SphericalCoordRecord
+polarCoordRecordDecoder : Decoder PolarCoordRecord
+polarCoordRecordDecoder =
+    Decode.map2 PolarCoordRecord
         (field "angle" float)
         (field "distance" float)
 
 
-sphericalToCartesianCoord : SphericalCoord -> Coord
-sphericalToCartesianCoord ( angle, distance ) =
+polarToCartesianCoord : PolarCoord -> CartesianCoord
+polarToCartesianCoord ( angle, distance ) =
     let
         zoom =
             (*) 5
@@ -71,7 +71,7 @@ subscriptions model =
     listen "ws://localhost:9999" Frame
 
 
-viewCoord : Coord -> Html Msg
+viewCoord : CartesianCoord -> Html Msg
 viewCoord ( x, y ) =
     circle
         [ cx (toString (250 + x))
