@@ -76,8 +76,8 @@ viewCoord ( x, y ) =
     circle
         [ cx (toString (250 + x))
         , cy (toString (250 + y))
-        , r "5"
-        , fill "#aacc66"
+        , r "2"
+        , fill "#99bb55"
         ]
         []
 
@@ -94,6 +94,15 @@ view model =
                 ]
                 []
 
+        origin =
+            circle
+                [ cx "250"
+                , cy "250"
+                , r "10"
+                , fill "#ffffff"
+                ]
+                []
+
         circles =
             model.points
                 |> Dict.values
@@ -107,7 +116,7 @@ view model =
                 ]
             ]
             [ svg [ width "500", height "250", viewBox "0 0 500 250" ]
-                (layout :: circles)
+                (layout :: origin :: circles)
             ]
 
 
